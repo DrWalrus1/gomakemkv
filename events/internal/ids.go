@@ -1,6 +1,7 @@
-package events
+package internal
 
 import "errors"
+
 var ErrUnknownAttribute = errors.New("unknown application item attribute")
 
 var attributeDetailedDescription = map[AppItemAttributeId]string{

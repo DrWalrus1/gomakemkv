@@ -3,6 +3,8 @@ package events
 import (
 	"strconv"
 	"strings"
+
+	"github.com/DrWalrus1/gomakemkv/events/internal"
 )
 
 type DriveScanMessage struct {
@@ -32,15 +34,16 @@ func parseDriveScanMessage(input string) (*DriveScanMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	driveScanMessage.Visible = GetDriveStateDescription(uint(visibleCode))
+	driveScanMessage.Visible = internal.GetDriveStateDescription(uint(visibleCode))
 	enabledCode, err := strconv.Atoi(split[2])
 	if err != nil {
 		return nil, err
 	}
-	driveScanMessage.Enabled = GetDriveStateDescription(uint(enabledCode))
+	driveScanMessage.Enabled = internal.GetDriveStateDescription(uint(enabledCode))
 	driveScanMessage.Flags = split[3]
 	driveScanMessage.DriveName = split[4]
 	driveScanMessage.DiscName = split[5]
 	driveScanMessage.DeviceName = split[6]
 	return &driveScanMessage, nil
 }
+
