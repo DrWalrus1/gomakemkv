@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"time"
 
+	"github.com/DrWalrus1/gomakemkv"
 	"github.com/DrWalrus1/gomakemkv/events"
 	"github.com/DrWalrus1/gomakemkv/internal/eventhandlers"
 )
@@ -38,8 +39,9 @@ func TriggerDiskInfo(source string) (io.Reader, context.CancelFunc, error) {
 }
 
 // MkvInfo calls the MakeMKV executable with the given arguments.
-func WatchInfoLogs(outputPipe io.Reader) <-chan events.MakeMkvOutput {
+func WatchInfoLogs(outputPipe io.Reader) (<-chan events.MakeMkvOutput, <-chan gomakemkv.DiscInfo) {
 	stringified := make(chan events.MakeMkvOutput)
+	discInfo := make(chan gomakemkv.DiscInfo)
 	go func() {
 
 		standardEvents, discEvents, disconnection := eventhandlers.MakeMkvInfoEventHandler(outputPipe)
@@ -50,14 +52,14 @@ func WatchInfoLogs(outputPipe io.Reader) <-chan events.MakeMkvOutput {
 			case standardEvent := <-standardEvents:
 				stringified <- standardEvent
 			case discEvent := <-discEvents:
-				stringified <- discEvent
+				discInfo <- discEvent
 			case <-disconnection:
 				close(stringified)
 				break loop
 			}
 		}
 	}()
-	return stringified
+	return stringified, discInfo
 }
 
 func TriggerInitialInfoLoad(timeoutLength time.Duration) (io.Reader, context.CancelFunc, error) {
