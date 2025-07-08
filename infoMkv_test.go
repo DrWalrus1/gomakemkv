@@ -1,10 +1,10 @@
-package commands_test
+package gomakemkv_test
 
 import (
 	"strings"
 	"testing"
 
-	"github.com/DrWalrus1/gomakemkv/internal/eventhandlers"
+	"github.com/DrWalrus1/gomakemkv"
 	"github.com/go-playground/assert/v2"
 )
 
@@ -183,7 +183,7 @@ SINFO:0,6,33,0,"90"
 SINFO:0,6,38,0,""
 SINFO:0,6,42,5088,"( Lossless conversion )"`
 
-	standardEvents, discInfoEvents, disconnection := eventhandlers.MakeMkvInfoEventHandler(strings.NewReader(input))
+	standardEvents, discInfoEvents := gomakemkv.ParseMakeMkvInfoCommandLogs(strings.NewReader(input))
 
 	standardEventCount := 0
 	discInfoEventCount := 0
@@ -194,7 +194,6 @@ loop:
 			standardEventCount++
 		case <-discInfoEvents:
 			discInfoEventCount++
-		case <-disconnection:
 			break loop
 		}
 	}
@@ -237,18 +236,21 @@ MSG:3025,16777216,3,"Title #00004.m2ts has length of 5 seconds which is less tha
 MSG:3025,16777216,3,"Title #00006.m2ts has length of 9 seconds which is less than minimum title length of 120 seconds and was therefore skipped","Title #%1 has length of %2 seconds which is less than minimum title length of %3 seconds and was therefore skipped","00006.m2ts","9","120"
 MSG:3025,0,3,"Title #00010.m2ts has length of 39 seconds which is less than minimum title length of 120 seconds and was therefore skipped","Title #%1 has length of %2 seconds which is less than minimum title length of %3 seconds and was therefore skipped","00010.m2ts","39","120"
 MSG:5011,0,0,"Operation successfully completed","Operation successfully completed"`
-	standardEvents, discInfoEvents, disconnection := eventhandlers.MakeMkvInfoEventHandler(strings.NewReader(input))
+	standardEvents, discInfoEvents := gomakemkv.ParseMakeMkvInfoCommandLogs(strings.NewReader(input))
 
 	standardEventCount := 0
 	discInfoEventCount := 0
 loop:
 	for {
 		select {
-		case <-standardEvents:
-			standardEventCount++
-		case <-discInfoEvents:
-			discInfoEventCount++
-		case <-disconnection:
+		case _, ok := <-standardEvents:
+			if ok {
+				standardEventCount++
+			}
+		case _, ok := <-discInfoEvents:
+			if ok {
+				discInfoEventCount++
+			}
 			break loop
 		}
 	}

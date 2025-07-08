@@ -3,6 +3,8 @@ package codes
 import "errors"
 
 const (
+	ap_Unknown               uint = 999
+	ap_Unknown2              uint = 255
 	ap_DriveStateNoDrive     uint = 256
 	ap_DriveStateUnmounting  uint = 257
 	ap_DriveStateEmptyClosed uint = 0
@@ -20,6 +22,8 @@ var driveStateDescriptions = map[uint]string{
 	ap_DriveStateEmptyOpen:   "Drive is empty and open",
 	ap_DriveStateInserted:    "Drive has disc inserted",
 	ap_DriveStateLoading:     "Drive is loading",
+	ap_Unknown:               "Unknown",
+	ap_Unknown2:              "Unknown",
 }
 
 func GetDriveStateDescription(id uint) (string, error) {

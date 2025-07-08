@@ -1,10 +1,7 @@
 package events
 
 import (
-	"bufio"
 	"errors"
-	"fmt"
-	"io"
 	"regexp"
 	"strings"
 )
@@ -32,23 +29,6 @@ func sanitiseString(input string) string {
 	boldOrBreakLineRegex := regexp.MustCompile("\u003c(b|/b|br)\u003e")
 	input = boldOrBreakLineRegex.ReplaceAllString(input, "")
 	return input
-}
-
-func ParseEventStream(reader io.Reader) <-chan MakeMkvOutput {
-	c := make(chan MakeMkvOutput)
-	go func() {
-		scanner := bufio.NewScanner(reader)
-		for scanner.Scan() {
-			output, err := Parse(scanner.Text())
-			if err != nil {
-				fmt.Println(err.Error())
-				continue
-			}
-			c <- output
-		}
-		close(c)
-	}()
-	return c
 }
 
 func Parse(input string) (MakeMkvOutput, error) {

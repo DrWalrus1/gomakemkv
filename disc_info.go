@@ -206,7 +206,7 @@ func (vt *SubtitleTrack) UpdateSubtitleTrack(info events.StreamInformation) {
 
 }
 
-func MakeMkveventsIntoMakeMkvDiscInfo(makemkvevents []events.MakeMkvOutput) MkvDiscInfo {
+func MakeMkvEventsIntoMakeMkvDiscInfo(makemkvevents []events.MakeMkvOutput) MkvDiscInfo {
 	mkvDiscInfo := NewDisc()
 	for _, x := range makemkvevents {
 		if i, ok := x.(*events.DiscInformation); ok {
