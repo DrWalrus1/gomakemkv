@@ -7,6 +7,7 @@ import (
 
 	"github.com/DrWalrus1/gomakemkv"
 	"github.com/DrWalrus1/gomakemkv/events"
+	"github.com/DrWalrus1/gomakemkv/events/codes"
 	"github.com/go-playground/assert/v2"
 )
 
@@ -14,24 +15,24 @@ func TestUpdateDiscInfo(t *testing.T) {
 	name := "Demon Slayer"
 	discType := "Blu-ray disc"
 	language := "English"
-	expected := gomakemkv.DiscInfo{
+	expected := gomakemkv.MkvDiscInfo{
 		Name:     name,
 		Type:     discType,
 		Language: language,
 	}
 
-	var actual gomakemkv.DiscInfo
+	var actual gomakemkv.MkvDiscInfo
 
 	typeDiscInfo := events.DiscInformation{
-		ID:    events.Type,
+		ID:    codes.Type,
 		Value: discType,
 	}
 	nameDiscInfo := events.DiscInformation{
-		ID:    events.Name,
+		ID:    codes.Name,
 		Value: name,
 	}
 	languageDiscInfo := events.DiscInformation{
-		ID:    events.MetadataLanguageName,
+		ID:    codes.MetadataLanguageName,
 		Value: language,
 	}
 

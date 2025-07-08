@@ -7,24 +7,20 @@ import (
 	"github.com/DrWalrus1/gomakemkv/events/codes"
 )
 
-type DiscInfo struct {
+type MkvDiscInfo struct {
 	Name     string        `json:"name"`
 	Language string        `json:"language"`
 	Type     string        `json:"type"`
 	Titles   map[int]Title `json:"titles"`
 }
 
-func (di DiscInfo) GetTypeName() string {
-	return "DiscInfoComplete"
-}
-
-func NewDisc() DiscInfo {
-	return DiscInfo{
+func NewDisc() MkvDiscInfo {
+	return MkvDiscInfo{
 		Titles: make(map[int]Title),
 	}
 }
 
-func (di *DiscInfo) UpdateDiscInfo(info events.DiscInformation) {
+func (di *MkvDiscInfo) UpdateDiscInfo(info events.DiscInformation) {
 	switch info.ID {
 	case codes.Name:
 		di.Name = info.Value
@@ -35,7 +31,7 @@ func (di *DiscInfo) UpdateDiscInfo(info events.DiscInformation) {
 	}
 }
 
-func (di *DiscInfo) UpsertDiscTitleMetadata(info events.TitleInformation) {
+func (di *MkvDiscInfo) UpsertDiscTitleMetadata(info events.TitleInformation) {
 	title, exists := di.Titles[info.TitleIndex]
 	if !exists {
 		title = NewTitle(strconv.Itoa(info.TitleIndex))
@@ -44,7 +40,7 @@ func (di *DiscInfo) UpsertDiscTitleMetadata(info events.TitleInformation) {
 	di.Titles[info.TitleIndex] = title
 }
 
-func (di *DiscInfo) UpsertTitleStreamMetadata(info events.StreamInformation) {
+func (di *MkvDiscInfo) UpsertTitleStreamMetadata(info events.StreamInformation) {
 	title, exists := di.Titles[info.TitleIndex]
 	if !exists {
 		title = NewTitle(strconv.Itoa(info.TitleIndex))
@@ -210,7 +206,7 @@ func (vt *SubtitleTrack) UpdateSubtitleTrack(info events.StreamInformation) {
 
 }
 
-func MakeMkveventsIntoMakeMkvDiscInfo(makemkvevents []events.MakeMkvOutput) DiscInfo {
+func MakeMkveventsIntoMakeMkvDiscInfo(makemkvevents []events.MakeMkvOutput) MkvDiscInfo {
 	mkvDiscInfo := NewDisc()
 	for _, x := range makemkvevents {
 		if i, ok := x.(*events.DiscInformation); ok {

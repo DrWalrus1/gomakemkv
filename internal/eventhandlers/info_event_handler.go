@@ -7,9 +7,9 @@ import (
 	"github.com/DrWalrus1/gomakemkv/events"
 )
 
-func MakeMkvInfoEventHandler(reader io.Reader) (standardEventsChannel chan events.MakeMkvOutput, discInfoEventChannel chan gomakemkv.DiscInfo, disconnectChannel chan bool) {
+func MakeMkvInfoEventHandler(reader io.Reader) (standardEventsChannel chan events.MakeMkvOutput, discInfoEventChannel chan gomakemkv.MkvDiscInfo, disconnectChannel chan bool) {
 	standardEventsChannel = make(chan events.MakeMkvOutput)
-	discInfoEventChannel = make(chan gomakemkv.DiscInfo)
+	discInfoEventChannel = make(chan gomakemkv.MkvDiscInfo)
 	disconnectChannel = make(chan bool)
 
 	go func() {
