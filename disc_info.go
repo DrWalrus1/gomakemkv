@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/DrWalrus1/gomakemkv/events"
+	"github.com/DrWalrus1/gomakemkv/events/codes"
 )
 
 type DiscInfo struct {
@@ -25,11 +26,11 @@ func NewDisc() DiscInfo {
 
 func (di *DiscInfo) UpdateDiscInfo(info events.DiscInformation) {
 	switch info.ID {
-	case events.Name:
+	case codes.Name:
 		di.Name = info.Value
-	case events.MetadataLanguageName:
+	case codes.MetadataLanguageName:
 		di.Language = info.Value
-	case events.Type:
+	case codes.Type:
 		di.Type = info.Value
 	}
 }
@@ -77,26 +78,26 @@ func NewTitle(id string) Title {
 
 func (t *Title) UpdateTitle(info events.TitleInformation) {
 	switch info.AttributeId {
-	case events.Name:
+	case codes.Name:
 		t.Name = info.Value
-	case events.DiskSize:
+	case codes.DiskSize:
 		t.Size = info.Value
-	case events.DiskSizeBytes:
+	case codes.DiskSizeBytes:
 		t.SizeInBytes = info.Value
-	case events.Duration:
+	case codes.Duration:
 		t.Duration = info.Value
-	case events.MetadataLanguageName:
+	case codes.MetadataLanguageName:
 		t.Language = info.Value
-	case events.ChapterCount:
+	case codes.ChapterCount:
 		t.Chapters = info.Value
-	case events.OutputFileName:
+	case codes.OutputFileName:
 		t.OutputFileName = info.Value
 	}
 }
 
 func (t *Title) UpsertStreamData(info events.StreamInformation) {
 	// Create new stream if the type is detected
-	if info.AttributeId == events.Type {
+	if info.AttributeId == codes.Type {
 		switch info.Value {
 		case "Video":
 			t.VideoTracks[info.StreamIndex] = VideoTrack{
@@ -147,15 +148,15 @@ type VideoTrack struct {
 
 func (vt *VideoTrack) UpdateVideoTrack(info events.StreamInformation) {
 	switch info.AttributeId {
-	case events.VideoFrameRate:
+	case codes.VideoFrameRate:
 		vt.Framerate = info.Value
-	case events.VideoSize:
+	case codes.VideoSize:
 		vt.VideoSize = info.Value
-	case events.CodecShort:
+	case codes.CodecShort:
 		vt.Codec = info.Value
-	case events.MetadataLanguageName:
+	case codes.MetadataLanguageName:
 		vt.Language = info.Value
-	case events.OutputConversionType:
+	case codes.OutputConversionType:
 		vt.ConversionType = info.Value
 	}
 }
@@ -173,19 +174,19 @@ type AudioTrack struct {
 
 func (vt *AudioTrack) UpdateAudioTrack(info events.StreamInformation) {
 	switch info.AttributeId {
-	case events.Name:
+	case codes.Name:
 		vt.Name = info.Value
-	case events.MetadataLanguageName:
+	case codes.MetadataLanguageName:
 		vt.Language = info.Value
-	case events.Bitrate:
+	case codes.Bitrate:
 		vt.Bitrate = info.Value
-	case events.AudioSampleRate:
+	case codes.AudioSampleRate:
 		vt.SampleRate = info.Value
-	case events.AudioSampleSize:
+	case codes.AudioSampleSize:
 		vt.SampleSize = info.Value
-	case events.AudioChannelsCount:
+	case codes.AudioChannelsCount:
 		vt.ChannelNumbers = info.Value
-	case events.OutputConversionType:
+	case codes.OutputConversionType:
 		vt.ConversionType = info.Value
 	}
 }
@@ -199,11 +200,11 @@ type SubtitleTrack struct {
 
 func (vt *SubtitleTrack) UpdateSubtitleTrack(info events.StreamInformation) {
 	switch info.AttributeId {
-	case events.MetadataLanguageName:
+	case codes.MetadataLanguageName:
 		vt.Language = info.Value
-	case events.CodecShort:
+	case codes.CodecShort:
 		vt.Codec = info.Value
-	case events.OutputConversionType:
+	case codes.OutputConversionType:
 		vt.ConversionType = info.Value
 	}
 

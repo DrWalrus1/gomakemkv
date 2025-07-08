@@ -1,6 +1,7 @@
 package gomakemkv
 
 import "github.com/DrWalrus1/gomakemkv/events"
+import "github.com/DrWalrus1/gomakemkv/events/codes"
 
 type MakeMkvDiscInfo struct {
 	Properties map[string]MakeMkvValue `json:"properties"`
@@ -8,8 +9,8 @@ type MakeMkvDiscInfo struct {
 }
 
 func (mkvDiscInfo *MakeMkvDiscInfo) addDiscInfoVerbose(discInfo events.DiscInformation) {
-	desc, _ := events.GetItemAttributeDescription(discInfo.ID)
-	messagecode, err := events.GetAppConstantDescription(discInfo.MessageCodeId)
+	desc, _ := codes.GetItemAttributeDescription(discInfo.ID)
+	messagecode, err := codes.GetAppConstantDescription(discInfo.MessageCodeId)
 	if err != nil {
 		messagecode = ""
 	}
@@ -27,8 +28,8 @@ func (discInfo *MakeMkvDiscInfo) addTitleInformationVerbose(titleInfo events.Tit
 			Streams:    make(map[int]map[string]MakeMkvValue),
 		}
 	}
-	desc, _ := events.GetItemAttributeDescription(titleInfo.AttributeId)
-	messagecode, err := events.GetAppConstantDescription(titleInfo.MessageCodeId)
+	desc, _ := codes.GetItemAttributeDescription(titleInfo.AttributeId)
+	messagecode, err := codes.GetAppConstantDescription(titleInfo.MessageCodeId)
 	if err != nil {
 		messagecode = ""
 	}
@@ -53,8 +54,8 @@ func (discInfo *MakeMkvDiscInfo) addStreamInformationVerbose(streamInfo events.S
 	if _, ok := discInfo.Titles[streamInfo.TitleIndex].Streams[streamInfo.StreamIndex]; !ok {
 		discInfo.Titles[streamInfo.TitleIndex].Streams[streamInfo.StreamIndex] = make(map[string]MakeMkvValue)
 	}
-	desc, _ := events.GetItemAttributeDescription(streamInfo.AttributeId)
-	messagecode, err := events.GetAppConstantDescription(streamInfo.MessageCodeId)
+	desc, _ := codes.GetItemAttributeDescription(streamInfo.AttributeId)
+	messagecode, err := codes.GetAppConstantDescription(streamInfo.MessageCodeId)
 	if err != nil {
 		messagecode = ""
 	}

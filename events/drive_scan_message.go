@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/DrWalrus1/gomakemkv/events/internal"
+	"github.com/DrWalrus1/gomakemkv/events/codes"
 )
 
 type DriveScanMessage struct {
@@ -34,16 +34,23 @@ func parseDriveScanMessage(input string) (*DriveScanMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	driveScanMessage.Visible = internal.GetDriveStateDescription(uint(visibleCode))
+	driveScanVisibibleString, err := codes.GetDriveStateDescription(uint(visibleCode))
+	if err != nil {
+		return nil, err
+	}
+	driveScanMessage.Visible = driveScanVisibibleString
 	enabledCode, err := strconv.Atoi(split[2])
 	if err != nil {
 		return nil, err
 	}
-	driveScanMessage.Enabled = internal.GetDriveStateDescription(uint(enabledCode))
+	driveScanEnabledString, err := codes.GetDriveStateDescription(uint(enabledCode))
+	if err != nil {
+		return nil, err
+	}
+	driveScanMessage.Enabled = driveScanEnabledString
 	driveScanMessage.Flags = split[3]
 	driveScanMessage.DriveName = split[4]
 	driveScanMessage.DiscName = split[5]
 	driveScanMessage.DeviceName = split[6]
 	return &driveScanMessage, nil
 }
-
