@@ -1,3 +1,5 @@
+// Package provides parsing capabilities for the makemkv console program.
+// Can handle makemkvcon mkv, backup, reg and info
 package gomakemkv
 
 import (
