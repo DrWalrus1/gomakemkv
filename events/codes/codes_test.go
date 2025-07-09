@@ -9,7 +9,7 @@ import (
 
 func TestConvertItemAttributeIntoToString(t *testing.T) {
 	tests := map[string]int{
-		`Unknown`:                         0,
+		"Unknown":                         0,
 		"Type":                            1,
 		"Name":                            2,
 		"LanguageCode":                    3,
