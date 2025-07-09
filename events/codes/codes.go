@@ -125,77 +125,77 @@ func GetItemAttributeDescription(id int) (string, error) {
 
 // CURRENTLY UNUSED CODES
 
-const (
-	ap_MaxCdromDevices              int = 16
-	ap_Progress_MaxValue            int = 65536
-	ap_Progress_MaxLayoutItems      int = 10
-	ap_UIMSG_BOX_MASK               int = 3854
-	ap_UIMSG_BOXOK                  int = 260
-	ap_UIMSG_BOXERROR               int = 516
-	ap_UIMSG_BOXWARNING             int = 1028
-	ap_UIMSG_BOXYESNO               int = 776
-	ap_UIMSG_BOXYESNO_ERR           int = 1288
-	ap_UIMSG_BOXYESNO_REG           int = 1544
-	ap_UIMSG_YES                    int = 0
-	ap_UIMSG_NO                     int = 1
-	ap_UIMSG_DEBUG                  int = 32
-	ap_UIMSG_HIDDEN                 int = 64
-	ap_UIMSG_EVENT                  int = 128
-	ap_UIMSG_HAVE_URL               int = 131072
-	ap_UIMSG_VITEM_BASE             int = 5200
-	ap_MMBD_DISC_FLAG_BUSENC        int = 2
-	ap_MMBD_MMBD_DISC_FLAG_AACS     int = 4
-	ap_MMBD_MMBD_DISC_FLAG_BDPLUS   int = 8
-	ap_vastr_Name                   int = 0
-	ap_vastr_Version                int = 1
-	ap_vastr_Platform               int = 2
-	ap_vastr_Build                  int = 3
-	ap_vastr_KeyType                int = 4
-	ap_vastr_KeyFeatures            int = 5
-	ap_vastr_KeyExpiration          int = 6
-	ap_vastr_EvalState              int = 7
-	ap_vastr_ProgExpiration         int = 8
-	ap_vastr_LatestVersion          int = 9
-	ap_vastr_RestartRequired        int = 10
-	ap_vastr_ExpertMode             int = 11
-	ap_vastr_ProfileCount           int = 12
-	ap_vastr_ProgExpired            int = 13
-	ap_vastr_OutputFolderName       int = 14
-	ap_vastr_OutputBaseName         int = 15
-	ap_vastr_CurrentProfile         int = 16
-	ap_vastr_OpenFileFilter         int = 17
-	ap_vastr_WebSiteURL             int = 18
-	ap_vastr_OpenDVDFileFilter      int = 19
-	ap_vastr_DefaultSelectionString int = 20
-	ap_vastr_DefaultOutputFileName  int = 21
-	ap_vastr_ExternalAppItem        int = 22
-	ap_vastr_InterfaceLanguage      int = 23
-	ap_vastr_ProfileString          int = 24
-	ap_vastr_KeyString              int = 25
-)
-
-const (
-	apNotifyUpdateLayoutFlagNoTime   = 1
-	apProgressCurrentIndexSourceName = 65280
-	apBackupFlagDecryptVideo         = 1
-	apOpenFlagManualMode             = 1
-	apUpdateDrivesFlagNoScan         = 1
-	apUpdateDrivesFlagNoSingleDrive  = 2
-)
-
-const (
-	apAVStreamFlagDirectorsComments          = 1
-	apAVStreamFlagAlternateDirectorsComments = 2
-	apAVStreamFlagForVisuallyImpaired        = 4
-	apAVStreamFlagCoreAudio                  = 256
-	apAVStreamFlagSecondaryAudio             = 512
-	apAVStreamFlagHasCoreAudio               = 1024
-	apAVStreamFlagDerivedStream              = 2048
-	apAVStreamFlagForcedSubtitles            = 4096
-	apAVStreamFlagProfileSecondaryStream     = 16384
-	apAVStreamFlagOffsetSequenceIdPresent    = 32768
-)
-
-const (
-	apAPPLOCMAX = 7000
-)
+// const (
+// 	ap_MaxCdromDevices              int = 16
+// 	ap_Progress_MaxValue            int = 65536
+// 	ap_Progress_MaxLayoutItems      int = 10
+// 	ap_UIMSG_BOX_MASK               int = 3854
+// 	ap_UIMSG_BOXOK                  int = 260
+// 	ap_UIMSG_BOXERROR               int = 516
+// 	ap_UIMSG_BOXWARNING             int = 1028
+// 	ap_UIMSG_BOXYESNO               int = 776
+// 	ap_UIMSG_BOXYESNO_ERR           int = 1288
+// 	ap_UIMSG_BOXYESNO_REG           int = 1544
+// 	ap_UIMSG_YES                    int = 0
+// 	ap_UIMSG_NO                     int = 1
+// 	ap_UIMSG_DEBUG                  int = 32
+// 	ap_UIMSG_HIDDEN                 int = 64
+// 	ap_UIMSG_EVENT                  int = 128
+// 	ap_UIMSG_HAVE_URL               int = 131072
+// 	ap_UIMSG_VITEM_BASE             int = 5200
+// 	ap_MMBD_DISC_FLAG_BUSENC        int = 2
+// 	ap_MMBD_MMBD_DISC_FLAG_AACS     int = 4
+// 	ap_MMBD_MMBD_DISC_FLAG_BDPLUS   int = 8
+// 	ap_vastr_Name                   int = 0
+// 	ap_vastr_Version                int = 1
+// 	ap_vastr_Platform               int = 2
+// 	ap_vastr_Build                  int = 3
+// 	ap_vastr_KeyType                int = 4
+// 	ap_vastr_KeyFeatures            int = 5
+// 	ap_vastr_KeyExpiration          int = 6
+// 	ap_vastr_EvalState              int = 7
+// 	ap_vastr_ProgExpiration         int = 8
+// 	ap_vastr_LatestVersion          int = 9
+// 	ap_vastr_RestartRequired        int = 10
+// 	ap_vastr_ExpertMode             int = 11
+// 	ap_vastr_ProfileCount           int = 12
+// 	ap_vastr_ProgExpired            int = 13
+// 	ap_vastr_OutputFolderName       int = 14
+// 	ap_vastr_OutputBaseName         int = 15
+// 	ap_vastr_CurrentProfile         int = 16
+// 	ap_vastr_OpenFileFilter         int = 17
+// 	ap_vastr_WebSiteURL             int = 18
+// 	ap_vastr_OpenDVDFileFilter      int = 19
+// 	ap_vastr_DefaultSelectionString int = 20
+// 	ap_vastr_DefaultOutputFileName  int = 21
+// 	ap_vastr_ExternalAppItem        int = 22
+// 	ap_vastr_InterfaceLanguage      int = 23
+// 	ap_vastr_ProfileString          int = 24
+// 	ap_vastr_KeyString              int = 25
+// )
+//
+// const (
+// 	apNotifyUpdateLayoutFlagNoTime   = 1
+// 	apProgressCurrentIndexSourceName = 65280
+// 	apBackupFlagDecryptVideo         = 1
+// 	apOpenFlagManualMode             = 1
+// 	apUpdateDrivesFlagNoScan         = 1
+// 	apUpdateDrivesFlagNoSingleDrive  = 2
+// )
+//
+// const (
+// 	apAVStreamFlagDirectorsComments          = 1
+// 	apAVStreamFlagAlternateDirectorsComments = 2
+// 	apAVStreamFlagForVisuallyImpaired        = 4
+// 	apAVStreamFlagCoreAudio                  = 256
+// 	apAVStreamFlagSecondaryAudio             = 512
+// 	apAVStreamFlagHasCoreAudio               = 1024
+// 	apAVStreamFlagDerivedStream              = 2048
+// 	apAVStreamFlagForcedSubtitles            = 4096
+// 	apAVStreamFlagProfileSecondaryStream     = 16384
+// 	apAVStreamFlagOffsetSequenceIdPresent    = 32768
+// )
+//
+// const (
+// 	apAPPLOCMAX = 7000
+// )
