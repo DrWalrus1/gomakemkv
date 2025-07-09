@@ -214,6 +214,7 @@ func (vt *SubtitleTrack) updateSubtitleTrack(info events.StreamInformation) {
 }
 
 // Function for converting a collection of [events.MakeMkvOutput] into a complete MkvDiscInfo structure
+// This functionality is needed at the end of the makemkvcon info command output, this is why this does not use a channel but instead passes an array
 func MakeMkvEventsIntoMakeMkvDiscInfo(makemkvevents []events.MakeMkvOutput) MkvDiscInfo {
 	mkvDiscInfo := NewDisc()
 	for _, x := range makemkvevents {

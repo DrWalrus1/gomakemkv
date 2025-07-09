@@ -31,6 +31,7 @@ func sanitiseString(input string) string {
 	return input
 }
 
+// Function to determine, based on prefix, which parser to use and return the appropriate struct
 func Parse(input string) (MakeMkvOutput, error) {
 	sanitised := sanitiseString(input)
 	if sanitised == "" {

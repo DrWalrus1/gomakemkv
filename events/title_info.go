@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// struct containing title information for a particular title on from source
 type TitleInformation struct {
 	TitleIndex    int
 	AttributeId   int
