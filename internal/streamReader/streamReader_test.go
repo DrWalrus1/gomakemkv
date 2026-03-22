@@ -31,7 +31,6 @@ func simulateMakeMkvProgressOutput(t *testing.T) io.Reader {
 	return reader
 }
 
-
 func TestReadStream(t *testing.T) {
 	mockOutput := simulateMakeMkvProgressOutput(t)
 	c := streamReader.ReadStream(mockOutput)
